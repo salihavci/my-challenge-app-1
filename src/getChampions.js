@@ -38,25 +38,31 @@ const Champions = () => {
 
   return (
     <div className="championsRow">
-      {championsList.map((x) => (
-        <div className="championsColumn" key={x.id}>
-          <img
-            src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${x.id}_0.jpg`}
-            alt={x.name}
-          />
-          <h2 className="name">{x.name}</h2>
-          <h3 className="title">{x.title}</h3>
-          <p className="txJustify">{x.blurb || ""}</p>
-          <p className="championsRow">
-            <i className="fa fa-gamepad"></i> {x.info.attack}
-            <i className="fa fa-shield"></i> {x.info.defense}
-            <i className="fa fa-bolt"></i> {x.info.magic}
-            <i className="fa fa-star-half-full"></i> {x.info.difficulty}
-          </p>
-        </div>
+      {championsList.map((x, index) => (
+        <ChampionsTemplate key={index} championInfo={x} />
       ))}
     </div>
   );
 };
+
+function ChampionsTemplate({ key, championInfo }) {
+  return (
+    <div className="championsColumn" key={key}>
+      <img
+        src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${championInfo.id}_0.jpg`}
+        alt={championInfo.name}
+      />
+      <h2 className="name">{championInfo.name}</h2>
+      <h3 className="title">{championInfo.title}</h3>
+      <p className="txJustify">{championInfo.blurb || ""}</p>
+      <p className="championsRow">
+        <i className="fa fa-gamepad"></i> {championInfo.info.attack}
+        <i className="fa fa-shield"></i> {championInfo.info.defense}
+        <i className="fa fa-bolt"></i> {championInfo.info.magic}
+        <i className="fa fa-star-half-full"></i> {championInfo.info.difficulty}
+      </p>
+    </div>
+  );
+}
 
 export default Champions;
